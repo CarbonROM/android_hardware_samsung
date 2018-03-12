@@ -1952,6 +1952,29 @@ Return<void> RadioImpl::setInitialAttachApn(int32_t serial, const DataProfileInf
         iaa.imsType = 0;
 #endif
 
+        static hidl_string HIDL_EMPTY = hidl_string("");
+
+        if (iaa.apn == NULL && !copyHidlStringToRil(
+                &iaa.apn, HIDL_EMPTY, pRI)) {
+            return Void();
+        }
+        if (iaa.protocol == NULL && !copyHidlStringToRil(
+                &iaa.protocol, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(1, iaa.apn);
+            return Void();
+        }
+        if (iaa.username == NULL && !copyHidlStringToRil(
+                &iaa.username, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(2, iaa.apn, iaa.protocol);
+            return Void();
+        }
+        if (iaa.password == NULL && !copyHidlStringToRil(
+                &iaa.password, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(3, iaa.apn, iaa.protocol, iaa.username);
+            return Void();
+        }
+
+
         CALL_ONREQUEST(RIL_REQUEST_SET_INITIAL_ATTACH_APN, &iaa, sizeof(iaa), pRI, mSlotId);
 
 #ifdef NEEDS_ROAMING_PROTOCOL_FIELD
@@ -2008,6 +2031,39 @@ Return<void> RadioImpl::setInitialAttachApn(int32_t serial, const DataProfileInf
         }
 
         if (!copyHidlStringToRil(&iaa.mvnoMatchData, dataProfileInfo.mvnoMatchData, pRI)) {
+            memsetAndFreeStrings(5, iaa.apn, iaa.protocol, iaa.roamingProtocol, iaa.username,
+                    iaa.password);
+            return Void();
+        }
+
+        static hidl_string HIDL_EMPTY = hidl_string("");
+
+        if (iaa.apn == NULL && !copyHidlStringToRil(
+                &iaa.apn, HIDL_EMPTY, pRI)) {
+            return Void();
+        }
+        if (iaa.protocol == NULL && !copyHidlStringToRil(
+                &iaa.protocol, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(1, iaa.apn);
+            return Void();
+        }
+        if (iaa.roamingProtocol == NULL && !copyHidlStringToRil(
+                &iaa.roamingProtocol, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(2, iaa.apn, iaa.protocol);
+            return Void();
+        }
+        if (iaa.username == NULL && !copyHidlStringToRil(
+                &iaa.username, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(3, iaa.apn, iaa.protocol, iaa.roamingProtocol);
+            return Void();
+        }
+        if (iaa.password == NULL && !copyHidlStringToRil(
+                &iaa.password, HIDL_EMPTY, pRI)) {
+            memsetAndFreeStrings(4, iaa.apn, iaa.protocol, iaa.roamingProtocol, iaa.username);
+            return Void();
+        }
+        if (iaa.mvnoMatchData == NULL && !copyHidlStringToRil(
+                &iaa.mvnoMatchData, HIDL_EMPTY, pRI)) {
             memsetAndFreeStrings(5, iaa.apn, iaa.protocol, iaa.roamingProtocol, iaa.username,
                     iaa.password);
             return Void();
