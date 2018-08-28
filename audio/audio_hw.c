@@ -759,7 +759,7 @@ static snd_device_t get_input_snd_device(struct audio_device *adev, audio_device
         }
     } else if (source == AUDIO_SOURCE_VOICE_COMMUNICATION || source == AUDIO_SOURCE_MIC) {
         if (out_device & AUDIO_DEVICE_OUT_SPEAKER)
-            in_device = AUDIO_DEVICE_IN_BACK_MIC;
+            in_device = AUDIO_DEVICE_IN_BACK_MIC & ~AUDIO_DEVICE_BIT_IN;
         if (active_input) {
             if (active_input->enable_aec) {
                 if (in_device & AUDIO_DEVICE_IN_BACK_MIC) {
