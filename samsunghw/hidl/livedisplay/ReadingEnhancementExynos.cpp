@@ -26,6 +26,17 @@ namespace samsung {
 
 // Methods from ::vendor::lineage::livedisplay::V2_0::ISunlightEnhancement follow.
 bool ReadingEnhancementExynos::isSupported() {
+    std::ifstream max_file("/sys/class/mdnie/mdnie/accessibility_max");
+    int max;
+
+    if (max_file.is_open()) {
+        max_file >> max;
+    }
+
+    if (max_file.good()) {
+        return max > 4;
+    }
+
     std::ofstream file("/sys/class/mdnie/mdnie/accessibility");
     return file.good();
 }
