@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.device;
+package com.android.settings.device;
 
 import android.app.ActionBar;
 import android.content.res.Resources;
@@ -22,9 +22,9 @@ import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
 import android.view.MenuItem;
 
-import org.lineageos.settings.device.R;
+import com.android.settings.device.R;
 
-import org.lineageos.internal.util.FileUtils;
+import com.android.internal.util.cr.FileUtils;
 
 public class AdvancedDisplayFragment extends PreferenceFragment {
     private mDNIeScenario mmDNIeScenario;
