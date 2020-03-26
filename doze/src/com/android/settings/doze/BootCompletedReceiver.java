@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 The CyanogenMod Project
+ * Copyright (c) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.lineageos.settings.doze;
 
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
+package com.android.settings.doze;
 
-public class SamsungDozeActivity extends PreferenceActivity {
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
-    private static final String TAG = "samsung_doze";
+public class BootCompletedReceiver extends BroadcastReceiver {
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private static final boolean DEBUG = false;
+    private static final String TAG = "SamsungDoze";
 
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new SamsungDozeSettings(), TAG).commit();
+    @Override
+    public void onReceive(final Context context, Intent intent) {
+        if (DEBUG) Log.d(TAG, "Received boot completed intent");
+        Utils.checkDozeService(context);
     }
+
 }

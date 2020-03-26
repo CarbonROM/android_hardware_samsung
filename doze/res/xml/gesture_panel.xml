@@ -33,6 +33,11 @@
     <PreferenceCategory
         android:key="proximity_sensor"
         android:title="@string/proximity_sensor_title">
+        <SwitchPreference
+            android:key="doze_enabled"
+            android:defaultValue="true"
+            android:title="@string/ambient_display_enable_title"
+            android:summary="@string/ambient_display_enable_summary" />
 
         <SwitchPreference
             android:key="gesture_hand_wave"
