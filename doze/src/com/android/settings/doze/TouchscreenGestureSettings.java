@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.doze;
+package com.android.settings.doze;
 
 import android.app.ActionBar;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 
-import org.lineageos.internal.util.ScreenType;
+import com.android.settings.util.ScreenType;
 
 public class TouchscreenGestureSettings extends PreferenceFragment {
 
